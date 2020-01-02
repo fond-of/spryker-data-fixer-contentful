@@ -18,7 +18,6 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
  */
 class ContentfulDataFixerPlugin extends AbstractPlugin implements DataFixerPluginInterface
 {
-
     /**
      * @return \FondOfSpryker\Zed\DataFixer\Business\Dependency\DataFixerInterface
      */
@@ -26,5 +25,4 @@ class ContentfulDataFixerPlugin extends AbstractPlugin implements DataFixerPlugi
     {
         return $this->getFactory()->createContentfulDataFixer();
     }
-
 }

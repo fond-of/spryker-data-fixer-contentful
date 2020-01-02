@@ -6,8 +6,6 @@ use Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer;
 use Orm\Zed\Contentful\Persistence\FosContentfulQuery;
 use Orm\Zed\ContentfulPageSearch\Persistence\FosContentfulPageSearchQuery;
 use Propel\Runtime\ActiveQuery\Criteria;
-use Propel\Runtime\ActiveQuery\ModelCriteria;
-use Propel\Runtime\Collection\ObjectCollection;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -15,10 +13,10 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
  */
 class DataFixerContentfulRepository extends AbstractRepository implements DataFixerContentfulRepositoryInterface
 {
-
     /**
-     * @param  \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer  $criteriaFilterTransfer
-     * @return array|\Orm\Zed\ContentfulPageSearch\Persistence\FosContentfulPageSearch[]
+     * @param \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
+     *
+     * @return \Orm\Zed\ContentfulPageSearch\Persistence\FosContentfulPageSearch[]
      */
     public function getWrongStoreContentfulPageSearchEntries(
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
@@ -30,8 +28,9 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
     }
 
     /**
-     * @param  \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer  $criteriaFilterTransfer
-     * @return array|\Orm\Zed\Contentful\Persistence\FosContentful[]
+     * @param \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
+     *
+     * @return \Orm\Zed\Contentful\Persistence\FosContentful[]
      */
     public function getWrongStoreContentfulEntries(
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
@@ -43,9 +42,10 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
     }
 
     /**
-     * @param  \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer  $criteriaFilterTransfer
-     * @param  \Orm\Zed\ContentfulPageSearch\Persistence\FosContentfulPageSearchQuery  $query
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     * @param \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
+     * @param \Orm\Zed\ContentfulPageSearch\Persistence\FosContentfulPageSearchQuery $query
+     *
+     * @return void
      */
     protected function createFilterContentfulPageSearch(
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer,
@@ -53,16 +53,19 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
     ): void {
 
         if ($criteriaFilterTransfer->getStoreName() !== null) {
-            $query->filterByKey_Like(strtolower($criteriaFilterTransfer->getStoreName().'%'));
-            $query->filterByStore(strtoupper($criteriaFilterTransfer->getStoreName()),
-                Criteria::NOT_EQUAL);
+            $query->filterByKey_Like(strtolower($criteriaFilterTransfer->getStoreName() . '%'));
+            $query->filterByStore(
+                strtoupper($criteriaFilterTransfer->getStoreName()),
+                Criteria::NOT_EQUAL
+            );
         }
     }
 
     /**
-     * @param  \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer  $criteriaFilterTransfer
-     * @param  \Orm\Zed\Contentful\Persistence\FosContentfulQuery  $query
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     * @param \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
+     * @param \Orm\Zed\Contentful\Persistence\FosContentfulQuery $query
+     *
+     * @return void
      */
     protected function createFilterContentful(
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer,
@@ -71,7 +74,7 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
 
         if ($criteriaFilterTransfer->getStoreName() !== null) {
             $query->filterByFkStore($criteriaFilterTransfer->getStoreId(), Criteria::EQUAL);
-            $query->filterByStorageKey(strtolower($criteriaFilterTransfer->getStoreName().'%'), Criteria::NOT_LIKE);
+            $query->filterByStorageKey(strtolower($criteriaFilterTransfer->getStoreName() . '%'), Criteria::NOT_LIKE);
         }
     }
 }

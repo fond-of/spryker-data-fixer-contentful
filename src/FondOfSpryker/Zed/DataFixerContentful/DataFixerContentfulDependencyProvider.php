@@ -12,7 +12,7 @@ class DataFixerContentfulDependencyProvider extends AbstractBundleDependencyProv
     public const FACADE_CONTENTFUL_STORAGE = 'FACADE_CONTENTFUL_STORAGE';
 
     /**
-     * @param  \Spryker\Zed\Kernel\Container  $container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
      */
@@ -22,7 +22,7 @@ class DataFixerContentfulDependencyProvider extends AbstractBundleDependencyProv
     }
 
     /**
-     * @param  \Spryker\Zed\Kernel\Container  $container
+     * @param \Spryker\Zed\Kernel\Container $container
      *
      * @return \Spryker\Zed\Kernel\Container
      */
@@ -35,7 +35,8 @@ class DataFixerContentfulDependencyProvider extends AbstractBundleDependencyProv
     }
 
     /**
-     * @param  \Spryker\Zed\Kernel\Container  $container
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addStoreFacade(Container $container): Container
@@ -48,7 +49,8 @@ class DataFixerContentfulDependencyProvider extends AbstractBundleDependencyProv
     }
 
     /**
-     * @param  \Spryker\Zed\Kernel\Container  $container
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addContentfulPagesearchFacade(Container $container): Container
@@ -61,7 +63,8 @@ class DataFixerContentfulDependencyProvider extends AbstractBundleDependencyProv
     }
 
     /**
-     * @param  \Spryker\Zed\Kernel\Container  $container
+     * @param \Spryker\Zed\Kernel\Container $container
+     *
      * @return \Spryker\Zed\Kernel\Container
      */
     protected function addContentfulStorageFacade(Container $container): Container

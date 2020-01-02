@@ -8,3 +8,20 @@
 ```
 composer require fond-of-spryker/data-fixer-contentful
 ```
+
+Register ContentfulDataFixerPlugin and ContentfulPageSearchDataFixerPlugin in DataFixerDependencyProvider
+
+```
+/**
+ * @param \Spryker\Zed\Kernel\Container $container
+ *
+ * @return array
+ */
+public function getDataFixer(Container $container): array
+{
+    return [
+        new ContentfulDataFixerPlugin(),
+        new ContentfulPageSearchDataFixerPlugin(),
+    ];
+}
+```

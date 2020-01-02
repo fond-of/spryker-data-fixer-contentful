@@ -2,20 +2,12 @@
 
 namespace FondOfSpryker\Zed\DataFixerContentful\Business\Fixer;
 
-
 use FondOfSpryker\Zed\ContentfulPageSearch\Business\ContentfulPageSearchFacadeInterface;
 use FondOfSpryker\Zed\DataFixer\Business\Dependency\DataFixerInterface;
 use FondOfSpryker\Zed\DataFixerContentful\DataFixerContentfulConfig;
-use FondOfSpryker\Zed\DataFixerContentful\Exception\SkuPrefixesNotConfiguredException;
-use FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulQueryContainerInterface;
 use FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulRepositoryInterface;
-use FondOfSpryker\Zed\Product\Business\ProductFacadeInterface;
-use FondOfSpryker\Zed\TaxProductConnector\Business\Product\ProductAbstractReader;
 use Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer;
-use Spryker\Client\Availability\Storage\AvailabilityStorage;
-use Spryker\Client\Availability\Storage\AvailabilityStorageInterface;
 use Spryker\Shared\Log\LoggerTrait;
-use Spryker\Zed\AvailabilityStorage\Business\AvailabilityStorageFacadeInterface;
 use Spryker\Zed\Store\Business\StoreFacadeInterface;
 
 class ContentfulPageSearchDataFixer implements DataFixerInterface
@@ -51,10 +43,11 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
 
     /**
      * ContentfulPageSearchDataFixer constructor.
-     * @param  \FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulRepositoryInterface  $repository
-     * @param  \FondOfSpryker\Zed\DataFixerContentful\DataFixerContentfulConfig  $config
-     * @param  \Spryker\Zed\Store\Business\StoreFacadeInterface  $storeFacade
-     * @param  \FondOfSpryker\Zed\ContentfulPageSearch\Business\ContentfulPageSearchFacadeInterface  $contentfulPageSearchFacade
+     *
+     * @param \FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulRepositoryInterface $repository
+     * @param \FondOfSpryker\Zed\DataFixerContentful\DataFixerContentfulConfig $config
+     * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade
+     * @param \FondOfSpryker\Zed\ContentfulPageSearch\Business\ContentfulPageSearchFacadeInterface $contentfulPageSearchFacade
      */
     public function __construct(
         DataFixerContentfulRepositoryInterface $repository,
@@ -77,7 +70,8 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
     }
 
     /**
-     * @param  array  $stores
+     * @param array $stores
+     *
      * @return bool
      */
     public function fix(array $stores): bool
@@ -92,12 +86,12 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
     }
 
     /**
-     * @param  string  $storeName
-     * @param $storeId
+     * @param string $storeName
+     * @param int $storeId
+     *
      * @return \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer
-     * @throws \FondOfSpryker\Zed\DataFixerContentful\Exception\SkuPrefixesNotConfiguredException
      */
-    public function prepareCriteriaFilter(string $storeName, $storeId): DataFixerContentfulCriteriaFilterTransfer
+    public function prepareCriteriaFilter(string $storeName, int $storeId): DataFixerContentfulCriteriaFilterTransfer
     {
         $stores = $this->storeFacade->getAllStores();
 
@@ -105,8 +99,8 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
         $criteriaFilter->setStoreName($storeName);
         $criteriaFilter->setStoreId($storeId);
 
-        foreach ($stores as $store){
-            if ($store->getName() !== $storeName){
+        foreach ($stores as $store) {
+            if ($store->getName() !== $storeName) {
                 $criteriaFilter->addWrongStoreNames($store->getName());
             }
         }
@@ -115,10 +109,9 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
     }
 
     /**
-     * @param  \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer  $criteriaFilter
+     * @param \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer $criteriaFilter
+     *
      * @return void
-     * @throws \Propel\Runtime\Exception\PropelException
-     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     protected function fixContentfulPageSearchData(DataFixerContentfulCriteriaFilterTransfer $criteriaFilter): void
     {
@@ -126,8 +119,12 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
         foreach ($this->repository->getWrongStoreContentfulPageSearchEntries($criteriaFilter) as $contentfulPageSearch) {
             $unpublishIds[] = $contentfulPageSearch->getFkContentful();
             $contentfulPageSearch->delete();
-            $this->getLogger()->info(sprintf('%s deleting ContentfulPageSearch %s in store %s', $this->getName(), $contentfulPageSearch->getKey(),
-                $criteriaFilter->getStoreName()), $contentfulPageSearch->toArray());
+            $this->getLogger()->info(sprintf(
+                '%s deleting ContentfulPageSearch %s in store %s',
+                $this->getName(),
+                $contentfulPageSearch->getKey(),
+                $criteriaFilter->getStoreName()
+            ), $contentfulPageSearch->toArray());
 
             if (count($unpublishIds) === $this->unpublishCollectionCount) {
                 $unpublishIds = $this->startUnpublishing($criteriaFilter, $unpublishIds);
@@ -139,8 +136,9 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
     }
 
     /**
-     * @param  \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer  $criteriaFilter
-     * @param  array  $unpublishIds
+     * @param \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer $criteriaFilter
+     * @param array $unpublishIds
+     *
      * @return array
      */
     protected function startUnpublishing(
@@ -148,9 +146,12 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
         array $unpublishIds
     ): array {
         $this->contentfulPageSearchFacade->unpublish($unpublishIds);
-        $this->getLogger()->info(sprintf('%s unpublished ContentfulPageSearch storage id(s) %s in store %s',
+        $this->getLogger()->info(sprintf(
+            '%s unpublished ContentfulPageSearch storage id(s) %s in store %s',
             $this->getName(),
-            implode(',', $unpublishIds), $criteriaFilter->getStoreName()), $unpublishIds);
+            implode(',', $unpublishIds),
+            $criteriaFilter->getStoreName()
+        ), $unpublishIds);
 
         return [];
     }

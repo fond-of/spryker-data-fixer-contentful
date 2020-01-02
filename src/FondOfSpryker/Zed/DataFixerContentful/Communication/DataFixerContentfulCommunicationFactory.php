@@ -32,6 +32,7 @@ class DataFixerContentfulCommunicationFactory extends AbstractCommunicationFacto
             $this->getContentfulPagesearchFacade()
         );
     }
+
     /**
      * @return \FondOfSpryker\Zed\DataFixer\Business\Dependency\DataFixerInterface
      */
@@ -47,7 +48,6 @@ class DataFixerContentfulCommunicationFactory extends AbstractCommunicationFacto
 
     /**
      * @return \Spryker\Zed\Store\Business\StoreFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getStoreFacade(): StoreFacadeInterface
     {
@@ -56,7 +56,6 @@ class DataFixerContentfulCommunicationFactory extends AbstractCommunicationFacto
 
     /**
      * @return \FondOfSpryker\Zed\ContentfulPageSearch\Business\ContentfulPageSearchFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getContentfulPagesearchFacade(): ContentfulPageSearchFacadeInterface
     {
@@ -65,7 +64,6 @@ class DataFixerContentfulCommunicationFactory extends AbstractCommunicationFacto
 
     /**
      * @return \FondOfSpryker\Zed\ContentfulStorage\Business\ContentfulStorageFacadeInterface
-     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function getContentfulStorageFacade(): ContentfulStorageFacadeInterface
     {
