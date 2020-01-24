@@ -13,7 +13,7 @@
     "fond-of-spryker/contentful": "dev-spryker_upgrade",
     "fond-of-spryker/contentful-page-search": "dev-spryker_upgrade",
     "fond-of-spryker/contentful-storage": "dev-spryker_upgrade",
-    "spryker/store": "~1.9.0",
+    "spryker/store": "^1.12.0",
     "fond-of-spryker/data-fixer": "^1.0.0"
   },
   "require-dev": {
