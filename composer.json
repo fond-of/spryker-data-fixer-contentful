@@ -10,9 +10,9 @@
   ],
   "require": {
     "php": ">=7.1",
-    "fond-of-spryker/contentful": "^4.6-RC2",
-    "fond-of-spryker/contentful-page-search": "^1.7-RC1",
-    "fond-of-spryker/contentful-storage": "^1.7-RC1",
+    "fond-of-spryker/contentful": "dev-spryker_upgrade",
+    "fond-of-spryker/contentful-page-search": "dev-spryker_upgrade",
+    "fond-of-spryker/contentful-storage": "dev-spryker_upgrade",
     "spryker/store": "~1.9.0",
     "fond-of-spryker/data-fixer": "^1.0.0"
   },
