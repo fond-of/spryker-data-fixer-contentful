@@ -9,12 +9,12 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
     "fond-of-spryker/contentful": "dev-spryker_upgrade",
     "fond-of-spryker/contentful-page-search": "dev-spryker_upgrade",
     "fond-of-spryker/contentful-storage": "dev-spryker_upgrade",
     "spryker/store": "^1.12.0",
-    "fond-of-spryker/data-fixer": "^1.0.0"
+    "fond-of-spryker/data-fixer": "dev-spryker_upgrade"
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.11",
