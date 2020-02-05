@@ -42,8 +42,6 @@ class ContentfulPageSearchDataFixer implements DataFixerInterface
     protected $config;
 
     /**
-     * ContentfulPageSearchDataFixer constructor.
-     *
      * @param \FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulRepositoryInterface $repository
      * @param \FondOfSpryker\Zed\DataFixerContentful\DataFixerContentfulConfig $config
      * @param \Spryker\Zed\Store\Business\StoreFacadeInterface $storeFacade

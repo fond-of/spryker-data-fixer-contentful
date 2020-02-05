@@ -16,6 +16,7 @@ use Spryker\Zed\Store\Business\StoreFacadeInterface;
  * @method \FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulQueryContainer getQueryContainer()
  * @method \FondOfSpryker\Zed\DataFixerContentful\Business\DataFixerContentfulFacadeInterface getFacade()
  * @method \FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulRepositoryInterface getRepository()
+ * @method \FondOfSpryker\Zed\DataFixerContentful\Persistence\DataFixerContentfulEntityManagerInterface getEntityManager()
  */
 class DataFixerContentfulCommunicationFactory extends AbstractCommunicationFactory
 {

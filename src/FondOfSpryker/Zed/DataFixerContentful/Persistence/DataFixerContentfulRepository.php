@@ -21,9 +21,9 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
     public function getWrongStoreContentfulPageSearchEntries(
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
     ): array {
-
         $query = $this->getFactory()->createContentfulPageSearchQuery();
         $this->createFilterContentfulPageSearch($criteriaFilterTransfer, $query);
+
         return $query->find()->getData();
     }
 
@@ -35,9 +35,9 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
     public function getWrongStoreContentfulEntries(
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer
     ): array {
-
         $query = $this->getFactory()->createContentfulQuery();
         $this->createFilterContentful($criteriaFilterTransfer, $query);
+
         return $query->find()->getData();
     }
 
@@ -51,7 +51,6 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer,
         FosContentfulPageSearchQuery $query
     ): void {
-
         if ($criteriaFilterTransfer->getStoreName() !== null) {
             $query->filterByKey_Like(strtolower($criteriaFilterTransfer->getStoreName() . '%'));
             $query->filterByStore(
@@ -71,7 +70,6 @@ class DataFixerContentfulRepository extends AbstractRepository implements DataFi
         DataFixerContentfulCriteriaFilterTransfer $criteriaFilterTransfer,
         FosContentfulQuery $query
     ): void {
-
         if ($criteriaFilterTransfer->getStoreName() !== null) {
             $query->filterByFkStore($criteriaFilterTransfer->getStoreId(), Criteria::EQUAL);
             $query->filterByStorageKey(strtolower($criteriaFilterTransfer->getStoreName() . '%'), Criteria::NOT_LIKE);

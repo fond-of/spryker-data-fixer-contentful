@@ -31,6 +31,7 @@ class DataFixerContentfulDependencyProvider extends AbstractBundleDependencyProv
         $container = $this->addStoreFacade($container);
         $container = $this->addContentfulPagesearchFacade($container);
         $container = $this->addContentfulStorageFacade($container);
+
         return $container;
     }
 
