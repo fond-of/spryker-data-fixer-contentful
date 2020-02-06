@@ -94,11 +94,11 @@ class ContentfulDataFixer implements DataFixerInterface
 
     /**
      * @param string $storeName
-     * @param $storeId
+     * @param int $storeId
      *
      * @return \Generated\Shared\Transfer\DataFixerContentfulCriteriaFilterTransfer
      */
-    public function prepareCriteriaFilter(string $storeName, $storeId): DataFixerContentfulCriteriaFilterTransfer
+    public function prepareCriteriaFilter(string $storeName, int $storeId): DataFixerContentfulCriteriaFilterTransfer
     {
         $stores = $this->storeFacade->getAllStores();
 
